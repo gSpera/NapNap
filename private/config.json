@@ -1,0 +1,13 @@
+{
+	"SocialName":"Nap Nap",
+	"Lang":"it",
+	"SiteUrl":"//napnap.herokuapp.com/",
+	"Host":"0.0.0.0",
+	"Port":5000,
+	"Desc":"Un Semplice Social-Network",
+	"DB_URL":"postgres://wntztrnmonnysq:6HZlq0EmK2jU48xbI0DffQNZgL@ec2-54-243-249-159.compute-1.amazonaws.com:5432/d4ai9mnn42d3tv",
+	"UploadMaxSize":16777216,
+	"SECRET_KEY":"Du\bC+e&M^H#,U1pq;8e4_.DtA+9\\Yoso!a3z$\\9Qv&L$TuXPZj;/BGRKPdNf|dTd7'9H\\dG:wF&+*^^aOtcKZWBW7\\mSs*TDqg5",
+	"PostLimit":15,
+	"Debug":true
+}

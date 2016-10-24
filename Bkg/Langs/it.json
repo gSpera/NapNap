@@ -1,0 +1,99 @@
+{
+  "HomePage":{
+    "Post":"Posta",
+    "Comment":"Commenta",
+    "UploadMaxSizeError":"Immagine Troppo grande.Supera i 16 MegaByte.",
+    "AddPost":"Aggiungi un Post",
+    "CommentName":"Commento",
+    "CommentNamePlural":"Commenti",
+    "AddComment":"Aggiungi un Commento",
+    "AddCommentAlert":"Il tuo commento verrà aggiunto a breve.",
+    "NotificationText":"{author} ha publicato un post il {date}.",
+    "ChangeDescription":"Cambia la Tua Descrizione",
+    "ChangeProfileImage":{
+      "text":"Cambia L'Immagine Di Profilo",
+      "URL":"Inserisci l'url dell'immagine:",
+      "Upload":"Oppure carica la foto"
+    },
+    "NextPage":"Pagina Successiva",
+    "PreviousPage":"Pagina Precedente"
+  },
+  "Feed":{
+    "TitleH1":"Feed Di {{cfg.SocialName}}",
+    "Desc":"Grazie ai Feed Atom e RSS potrai ricevere le tue notifiche in ogni momento<br> senza dover aprire il tuo browser,basta un semplicissimo Feed Reader.<br> Per usare i Feed Atom e RSS hai bisogno di una FeedKey<br>",
+    "//Desc":[
+      "Grazie ai Feed Atom e RSS potrai ricevere le tue notifiche in ogni momento<br>",
+      "senza dover aprire il tuo browser,basta un semplicissimo Feed Reader.<br>",
+      "Per usare i Feed Atom e RSS hai bisogno di una FeedKey<br>"
+    ],
+    "FeedKeyTitle":"La tua Feed Key è",
+    "NewPost":"Nuovo Post Di "
+  },
+  "NoFollow":{
+    "TitleH1":"{{cfg.SocialName}}",
+    "SubTitleH2":"You don't follow anyone :(",
+    "Text":"You can search people with this research bar"
+  },
+  "Login":{
+    "RegistrationMessage":"Non sei ancora Registrato?? Fallo Subito"
+  },
+  "Register":{
+    "Title":"{{cfg.SocialName}} Registrazione",
+    "H1":"Registrati a {{cfg.SocialName}}",
+    "Register":"Registrati",
+    "Name":"Nome",
+    "NameHelp":"Il tuo Nome",
+    "Surname":"Cognome",
+    "SurnameHelp":"Il tuo Cognome",
+    "Username":"Username",
+    "UsernameHelp":"Il tuo Username univoco",
+    "Password":"Password",
+    "PasswordHelp":"La tua Password",
+    "PasswordCheck":"Password",
+    "PasswordCheckHelp":"Ripeti la Password per sicurezza",
+    "PasswordCheckPlaceHolder":"Ripeti la Password",
+    "Desc":"Descrizione",
+    "DescPlaceHolder":"Parlaci un pò di te",
+    "UsernameFree":"Username Libero",
+    "UsernameOccupied":"Username Occupato",
+    "PasswordShort":"Password Corta",
+    "PasswordDifferent":"Password Diverse",
+    "PasswordSame":"Password Uguali"
+  },
+  "Search":{
+    "Title":"Cerca Su {{cfg.SocialName}}",
+    "NoResult":"Non ci sono risultati.",
+    "NextPage":"Pagina Successiva",
+    "PreviousPage":"Pagina Precedente"
+  },
+  "ChangePassword":{
+    "Title":"{{cfg.SocialName}} Cambia Password",
+    "PasswordDifferent":"Password Diverse",
+    "PasswordSame":"Password Uguali",
+    "TitleH1":"{{cfg.SocialName}}",
+    "SubTitleH2":"Cambia La Tua Password",
+    "Text":"<b>!ATTENTO!</b>Fallo Solamente se sai cosa stai facendo <b>!ATTENTO!</b>",
+    "PasswordOld":"Password Attuale",
+    "PasswordNew":"Password Nuova",
+    "PasswordNewCheck":"Riscrivi La Password Nuova:",
+    "ChangePassword":"Cambia Password"
+  },
+  "UserNav":{
+    "Follow":"Segui ",
+    "StopFollow":"Smetti Di Seguire ",
+    "NoFollow":" Non Segue Nessuno",
+    "YouNoFollow":"Non Segui Nessuno",
+    "FollowingUsers":"Utenti Seguiti:"
+  },
+  "TopBar":{
+    "Login":"Login",
+    "Register":"Registrati",
+    "Home":"Home",
+    "Find":"Cerca",
+    "Notification":"Notifiche",
+    "Feed":" Feed RSS/Atom",
+    "ChangePassword":"Cambia Password",
+    "Logout":"Esci",
+    "Find":"Cerca"
+  }
+}

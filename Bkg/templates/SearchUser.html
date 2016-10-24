@@ -1,0 +1,115 @@
+<html>
+  <head>
+    <title>{{lang.Title|formatString}}</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+      /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+      .row.content {height: 550px}
+
+      /* Set gray background color and 100% height */
+      .sidenav {
+        background-color: #f1f1f1;
+        height: 100%;
+      }
+
+      /* On small screens, set height to 'auto' for the grid */
+      @media screen and (max-width: 767px) {
+        .row.content {height: auto;}
+      }
+      div.sidenav{
+        border-top-right-radius: 3%;
+        border-bottom-right-radius: 3%;
+        word-break: break-all;
+      }
+      textarea.form-control{
+        border-top-left-radius: 0%;
+        border-top-right-radius: 0%;
+        border: 0px;
+      }
+      h4{
+        margin-bottom: 3px;
+      }
+      button{
+        margin-top: 5px;
+      }
+      span.glyphicon{
+        margin-left:-10px;
+        margin-right: 5px;
+      }
+      li > a{
+        padding-left: 5px !important;
+      }
+      ul{
+        margin-bottom: 5px;
+        margin-top: 5px;
+      }
+      ul > h2{
+        display:inline;
+      }
+      ul > a{
+        margin-left: 15px;
+      }
+      div#search > *{
+        background-color: rgb(33, 33, 34);
+        border: 1px rgb(38, 38, 38) solid;
+        color: white;
+        vertical-align: middle !important;
+      }
+      span.glyphicon{
+        padding-left:10px;
+      }
+      @media (min-width: 767px) {
+        div.jumbotron{
+          margin-left:20%;
+          margin-right:20%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    {% include "TopBar.html" %}
+    <div class="container">
+      <div class="jumbotron">
+        {% for u in search%}
+        <a href="/u/{{u.UserId}}">
+          <div class="well">
+            <img src="{{u.img}}" alt="{{u.UserId}}" class="img-thumbnail" height="15%" width="15%" style="max-width:128px;max-height:128px;">
+            <span>{{u.name}} {{u.cognome}}<br>
+            <small class="text-muted">@{{u.UserId}}</small>
+            {{u.desc}}</span>
+          </div>
+        </a>
+        {% endfor %}
+
+        {% set pageN=pageN or 0 %}
+        {% if search|length == 0 and pageN > 0 %}
+          <script>
+            window.location.replace("{{URL}}{{pageN-1}}");
+          </script>
+        {% endif %}
+        <div style="margin-top:50px;margin-bottom:50px;">
+          {%if pageN > 0%}
+            <a href="{{URL}}{{pageN-1}}">
+              <button class="btn btn-default">
+                {{lang.PreviousPage}}
+              </button>
+            </a>
+          {% endif %}
+          <button class="btn btn-success">
+            {{pageN}}
+          </button>
+          <a href="{{URL}}{{pageN+1}}">
+            <button class="btn btn-primary">
+              {{lang.NextPage}}
+            </button>
+          </a>
+        </div>
+      </div>
+    </div>
+    {% include "Footer.html" %}
+  </body>
+</html>

@@ -1,0 +1,9 @@
+{
+	"SocialName":"Nap Nap",
+	"Lang":"it",
+	"SiteUrl":"//www.NapNap.ml",
+	"Desc":"Un Bellissimo Social-Network",
+	"DB_URL":"sqlite:///C:\\Users\\Win8\\Desktop\\Social.db",
+	"SECRET_KEY":"Du\bC+e&M^H#,U1pq;8e4_.DtA+9\\Yoso!a3z$\\9Qv&L$TuXPZj;/BGRKPdNf|dTd7'9H\\dG:wF&+*^^aOtcKZWBW7\\mSs*TDqg5",
+	"PostLimit":15
+}

@@ -1,0 +1,159 @@
+<html>
+  <head>
+    <title>{{lang.Title|formatString}}</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+      /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+      .row.content {height: 550px}
+
+      /* Set gray background color and 100% height */
+      .sidenav {
+        background-color: #f1f1f1;
+        height: 100%;
+      }
+
+      /* On small screens, set height to 'auto' for the grid */
+      @media screen and (max-width: 767px) {
+        .row.content {height: auto;}
+      }
+      div.sidenav{
+        border-top-right-radius: 3%;
+        border-bottom-right-radius: 3%;
+      }
+      #Flash{
+        position: fixed;
+        bottom: 5%;
+        right: 5%;
+        max-width: 450px;
+        list-style-type: none;
+      }
+    </style>
+    <script>
+      UserNameRE=/[^a-zA-Z0-9_\&]/g;
+      function checkPass(){
+        pass=$("#password").val();
+        check=$("#passwordCheck").val();
+        name=$("#username").val();
+
+        if(pass.length<8){
+          $("#passMessage").html("<span class='text-danger'>{{lang.PasswordShort}}</span>");
+        }else {
+          $("#passMessage").html("<span class='text-success'>{{lang.Password}}</span>");
+        }
+
+        if(pass!=check){
+          $("#checkMessage").html("<span class='text-danger'>{{lang.PasswordDifferent}}</span>");
+        }else{
+          $("#checkMessage").html("<span class='text-success'>{{lang.PasswordSame}}</span>");
+        }
+      }
+      function checkUser(){
+        var name = encodeURI($("#username").val());
+        var debug=UserNameRE.exec(name);
+        console.log(debug);
+        if (debug!==null){
+          console.log("Non Valido");
+          $("#usernameCheck").html("<span class='text-danger'>{{lang.UsernameNotValid}}");
+        }else{
+          //console.log("AJAX "+name);
+          $.ajax({url: "/api/usernameExist/"+name, success: function(res){
+              if (res=="Occupato"){
+                $("#usernameCheck").html("<span class='text-danger'>{{lang.UsernameOccupied}}");
+              }else{
+                $("#usernameCheck").html("<span class='text-success'>{{lang.UsernameFree}}");
+              }
+          }});
+        }
+      }
+      function removeFlash(){
+        $("#Flash").fadeOut();
+      }
+      setTimeout(removeFlash,5000);
+
+    </script>
+  </head>
+  <body>
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul id="Flash">
+          {% for message in messages %}
+            <li class="alert alert-danger">{{message}}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+    <div class="container well">
+      <form class="form-horizontal" method="POST">
+        <fieldset class="center-block">
+        <legend style="text-align:center;"><h1>{{lang.H1|formatString}}</h1></legend>
+
+          <!--Nome-->
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="name">{{lang.Name}}</label>
+            <div class="col-md-4">
+            <input id="name" name="name" type="text" placeholder="{{lang.Name}}" class="form-control input-md" required="">
+            <span class="help-block">{{lang.NameHelp}}</span>
+            </div>
+          </div>
+
+          <!--Cognome-->
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="cognome">{{lang.Surname}}</label>
+            <div class="col-md-4">
+            <input id="cognome" name="cognome" type="text" placeholder="{{lang.Surname}}" class="form-control input-md" required="">
+            <span class="help-block">{{lang.SurnameHelp}}</span>
+            </div>
+          </div>
+
+          <!--Username-->
+          <div class="form-group">
+            <label id="usernameCheck" class="col-md-4 control-label" for="username">{{lang.Username}}</label>
+            <div class="col-md-4">
+            <input id="username" name="username" type="text" placeholder="{{lang.Username}}" class="form-control input-md" required="" onKeyUp="checkUser();">
+            <span class="help-block">{{lang.UsernameHelp}}</span>
+            </div>
+          </div>
+
+          <!--Password-->
+          <div class="form-group">
+            <label id="passMessage" class="col-md-4 control-label" for="password">{{lang.Password}}</label>
+            <div class="col-md-4">
+              <input id="password" name="password" type="password" placeholder="{{lang.Password}}" class="form-control input-md" required="" onKeyUp="checkPass();">
+              <span class="help-block">{{lang.PasswordHelp}}</span>
+            </div>
+          </div>
+
+          <!--Password Check-->
+          <div class="form-group">
+            <label id="checkMessage" class="col-md-4 control-label" for="passwordCheck">{{lang.PasswordCheck}}</label>
+            <div class="col-md-4">
+              <input id="passwordCheck" name="passwordCheck" type="password" placeholder="{{lang.PasswordCheckPlaceHolder}}" class="form-control input-md" required="" onKeyUp="checkPass();">
+              <span class="help-block">{{lang.PasswordCheckHelp}}</span>
+            </div>
+          </div>
+
+          <!--Descrizione-->
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="desc">{{lang.Desc}}</label>
+            <div class="col-md-4">
+              <textarea class="form-control" id="desc" name="desc" placeholder="{{lang.DescPlaceHolder}}"></textarea>
+            </div>
+          </div>
+
+          <!--Pulsante-->
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="register"></label>
+            <div class="col-md-6">
+              <button id="register" name="register" class="btn btn-primary input-lg">{{lang.Register}}</button>
+            </div>
+          </div>
+        </fieldset>
+        </form>
+    </div>
+    {% include "Footer.html" %}
+  </body>
+</html>

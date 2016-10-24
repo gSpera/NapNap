@@ -1,0 +1,40 @@
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="/static/social.css">
+    <link href="https://fonts.googleapis.com/css?family=Indie+Flower|Montserrat|Roboto" rel="stylesheet">
+  </head>
+  <body>
+    <div class="background">
+      <img src="{{user.backImg}}" alt="{{cfg.name}} {{cfg.cognome}}">
+    </div>
+    <div class="left">
+      <img src="{{user.img}}" alt="Immagine Del Profilo" class="profileImage"><br>
+      <h1>{{user.name}} {{user.cognome}}</h1>
+      <h3>
+        {{user.desc}}
+      </h3>
+      <hr>
+    </div>
+    <div class="right">
+      {% if user.UserId == Cookie %}
+      <form method="POST" action="/api/addPost">
+        <textarea class="newPost" name="text"></textarea>
+        <button class="Post">Posta</button>
+      </form>
+      {% endif %}
+      {%for post in posts%}
+        <div class="post">
+            <img src="{{user.img}}" class="profileImage" height="35px" width="35px" style="bottom:0;right:7px;">
+            <span class="date">{{post.date}}</span>
+            <span>{{post.text}}</span>
+            {%for comment in post.comments%}
+              <div class="comment">
+                {{comment.text}}
+              </div>
+            {%endfor%}
+        </div>
+      {%endfor%}
+    </div>
+    <div>
+  </body>
+</html>

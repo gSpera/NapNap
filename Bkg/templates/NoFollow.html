@@ -1,0 +1,46 @@
+<html>
+  <head>
+    <title>{{cfg.SocialName}} Follow</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+      *{
+        word-break: break-all;
+      }
+      form{
+        margin-top:5px;
+      }
+      button.register{
+        margin-left: 35%;
+        margin-right: 35%;
+      }
+      input.center{
+        margin-left: 42%;
+        margin-right: 43%;
+      }
+    </style>
+    <script>
+      function search(){
+        var value = document.getElementById("searchInput").value;
+        window.location.href = "/search/"+value;
+      }
+    </script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="jumbotron" style="text-align:center;">
+        <h1>{{lang.TitleH1|formatString}}</h1>
+        <h2>{{lang.SubTitleH2|formatString}}</h2>
+        <h4>{{lang.Text|formatString}}</h4>
+        <div class="input-group col-sm-offset-5 col-sm-3 text-center">
+          <input type="text" name="search" placeholder="Cerca" class="form-control" id="searchInput">
+          <span class="input-group-addon" onClick="search();"><span class="glyphicon glyphicon-search"></span></span>
+        </div>
+      </div>
+    </div>
+    {% include "Footer.html" %}
+  </body>
+</html>

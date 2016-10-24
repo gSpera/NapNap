@@ -1,0 +1,82 @@
+body{
+  padding:0px;
+  margin:0px;
+  background-color: rgba(244, 244, 244, 1);
+  font-family: 'Roboto', sans-serif;
+}
+div.background{
+  width:100%;
+  height:17%;
+}
+div.background img{
+  width:100%;
+  height:100%;
+}
+div.post{
+  margin: 5px;
+  margin-top: 25px;
+  font-size: 25px;
+  width:60%;
+  //background-color: white;
+}
+div.comment{
+//  background-color: blue;
+  padding: 3px;
+  font-size:15px;
+}
+div.left{
+//  background-color:green;
+  padding-left: 0px;
+  position:absolute;
+  height:100%;
+  width:20%;
+  margin:0px;
+  display:inline;
+  padding-top: 0px;
+  border-right: 1px solid gray;
+}
+div.left *{
+  padding-left: 15px;
+}
+div.right{
+//  background-color:red;
+  padding-left: 20px;
+  height:100%;
+  width:70%;
+  margin:0px;
+  margin-left:20%;
+  padding-top: 5px;
+}
+img.profileImage{
+  border-radius: 20%;
+  position:relative;
+  bottom: 25px;
+}
+hr{
+  margin-left: 0px;
+  padding-left: -15px;
+}
+textarea.newPost{
+  height:10%;
+  width:70%;
+}
+button.Post{
+  background-color: rgb(4, 112, 255);
+  border:2px solid rgb(4, 112, 255);
+  color:white;
+}
+span.date{
+  display:inline;
+  color:gray;
+  font-size:10px;
+  bottom:25px;
+  position:relative;
+}
+span.textPost{
+  margin-left: -45px;
+  width:50%;
+  white-space: wrap;
+}
+h1{
+  font-family: 'Montserrat', sans-serif;
+}
