@@ -1,8 +1,8 @@
 {
-  "name": "Start on Heroku: Python",
-  "description": "A barebones Python app, which can easily be deployed to Heroku.",
+  "name": "NapNap",
+  "description": "A Little Social Network in Python",
   "image": "heroku/python",
-  "repository": "CasaMia",
+  "repository": "NapNap",
   "keywords": ["python", "flask" ],
   "addons": [ "heroku-postgresql" ]
 }
