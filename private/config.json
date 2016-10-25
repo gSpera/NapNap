@@ -1,7 +1,7 @@
 {
 	"SocialName":"Nap Nap",
 	"Lang":"it",
-	"SiteUrl":"//napnap.herokuapp.com/",
+	"SiteUrl":"//napnap.herokuapp.com",
 	"Host":"0.0.0.0",
 	"Port":5000,
 	"Desc":"Un Semplice Social-Network",
