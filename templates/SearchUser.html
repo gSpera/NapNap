@@ -77,7 +77,7 @@
         {% for u in search%}
         <a href="/u/{{u.UserId}}">
           <div class="well">
-            <img src="/{{u.img}}" alt="{{u.UserId}}" class="img-thumbnail" height="15%" width="15%" style="max-width:128px;max-height:128px;">
+            <img src="{{u.img}}" alt="{{u.UserId}}" class="img-thumbnail" height="15%" width="15%" style="max-width:128px;max-height:128px;">
             <span>{{u.name}} {{u.cognome}}<br>
             <small class="text-muted">@{{u.UserId}}</small>
             {{u.desc}}</span>
