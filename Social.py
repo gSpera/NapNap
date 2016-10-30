@@ -49,15 +49,14 @@ UserNameRE = re.compile("[^a-zA-Z0-9_\&]")
 from Models import *
 # ------------END Model------------ #
 
+# ------------API------------ #
+from Api import *
+# ------------END Utils------------ #
 
 # ------------Route------------ #
 from Route import *
 # ------------END Route------------ #
 
-
-# ------------API------------ #
-from Api import *
-# ------------END Utils------------ #
 
 
 if __name__ == "__main__":
