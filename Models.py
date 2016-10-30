@@ -1,3 +1,6 @@
+from Social import *
+
+
 class Comment(db.Model):
     __tablename__ = "Comments"
     Id = db.Column(db.Integer, unique=True, primary_key=True)
