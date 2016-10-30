@@ -1,3 +1,6 @@
+from Social import *
+
+
 @app.route("/api/usernameExist/<string:username>")
 def UserNameExist(username):
     if User.query.filter_by(UserId=username).first():
