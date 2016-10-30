@@ -1,3 +1,4 @@
+from Social import *
 
 
 @app.route("/favicon.ico")
