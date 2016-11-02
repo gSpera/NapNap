@@ -1,0 +1,33 @@
+<html>
+  <head>
+    <title>{{cfg.SocialName}} Feed</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+      pre{
+        margin-left: 10%;
+        margin-right: 10%;
+      }
+    </style>
+  </head>
+  <body>
+	{% include "BodyExt.html" %}
+      <div class="container">
+        <div class="jumbotron row" style="text-align:center;">
+          <h1>{{ lang.TitleH1|formatString }}</h1>
+          {{ lang.Desc|formatString|safe }}
+          <h4>{{ lang.FeedKeyTitle }}</h4>
+          <pre>{{ user.FeedKey|formatString }}</pre>
+          Gli Url da inserire nel tuo Feed Reader sono:
+          <h4>Atom</h4><br>
+          <pre><a href="{{cfg.SiteUrl}}/atom/{{user.FeedKey}}.xml">{{cfg.SiteUrl}}/atom/{{user.FeedKey}}.xml</a></pre>
+          <h4>RSS</h4><br>
+          <pre><a href="{{cfg.SiteUrl}}/rss/{{user.FeedKey}}.xml">{{cfg.SiteUrl}}/rss/{{user.FeedKey}}.xml</a></pre>
+        </div>
+      </div>
+      {% include "Footer.html" %}
+  </body>
+</html>

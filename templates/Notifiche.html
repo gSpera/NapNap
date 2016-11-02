@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <title>Notifiche - {{cfg.SocialName}}</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <style>
+    /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+    .row.content {height: 550px}
+
+    /* Set gray background color and 100% height */
+    .sidenav {
+      background-color: #f1f1f1;
+      height: 100%;
+    }
+
+    /* On small screens, set height to 'auto' for the grid */
+    @media screen and (max-width: 767px) {
+      .row.content {height: auto;}
+    }
+    div.sidenav{
+      border-top-right-radius: 3%;
+      border-bottom-right-radius: 3%;
+      word-break: break-all;
+    }
+    textarea.form-control{
+      border-top-left-radius: 0%;
+      border-top-right-radius: 0%;
+      border: 0px;
+    }
+    h4{
+      margin-bottom: 3px;
+    }
+    button{
+      margin-top: 5px;
+    }
+    span.glyphicon{
+      margin-left:-10px;
+      margin-right: 5px;
+    }
+    li > a{
+      padding-left: 5px !important;
+    }
+    ul{
+      margin-bottom: 5px;
+      margin-top: 5px;
+    }
+    ul > h2{
+      display:inline;
+    }
+    ul > a{
+      margin-left: 15px;
+    }
+
+    div#search > input{
+      vertical-align: middle !important;
+      width:350px;
+    }
+    div#search > *{
+      background-color: rgb(33, 33, 34) !important;
+      border: 1px rgb(38, 38, 38) solid !important;
+      color: white;
+    }
+    div#searchM > input{
+      vertical-align: middle !important;
+      width:100%;
+    }
+    div#searchM > *{
+      background-color: rgb(33, 33, 34) !important;
+      border: 1px rgb(38, 38, 38) solid !important;
+      color: white;
+    }
+
+    span.glyphicon{
+      padding-left:10px;
+    }
+  </style>
+  <script>
+    $(function(){
+      $('#notification').popover(
+        {
+        trigger:"hover",
+        content:$("#notificheBox").html(),
+        title:"Notifiche Recenti",html:true,
+        container:"body"
+      });
+    });
+  </script>
+</head>
+<body>
+	{% include "BodyExt.html" %}
+</div>
+  {% include "TopBar.html" %}
+  {% include "UserNav.html" %}
+        <div class="col-sm-9">
+          {%for noti in notification%}
+            <!--Notifica-->
+            <div class="well">
+              <h4>
+                {{noti.author}} ha publicato un post il {{noti.date.strftime("%c")}}.
+              </h4>
+              <span>
+                {{noti.text}}
+              </span>
+            </div>
+            <!--END Notifica-->
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

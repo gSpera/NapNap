@@ -1,0 +1,54 @@
+<div class="row content">
+  <div class="col-sm-3 sidenav hidden-xs" style="height:auto;max-width:550px;">
+    <br>
+    <div style="position:relative;display: inline-block">
+      <img class="img-thumbnail" src="{{user.img}}" id="ProfilePhoto">
+      {% if user.UserId == login.UserId and follow == False%}
+        <span id="EditProfilePhoto" class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="#changeProfileImage"></span>
+      {% endif %}
+    </div>
+    <ul class="nav nav-pills nav-stacked">
+      <h2><kbd class="bg-primary">{{user.name}} <wbr>{{user.cognome}}</kbd>
+      </h2><br>
+
+      <li>
+        <h4 style="display:inline-block">{{user.desc}}</h4>
+        {% if user.UserId == login.UserId and follow == False%}
+          <span id="EditDesc" class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="#editDesc"></span>
+        {% endif %}
+      </li>
+      {% if login.is_anonymous == false and user.UserId != login.UserId and follow == False%}
+        {% if user in getFollowUsers(login) %}
+            <a onClick="location.reload();" href="/api/removeFollowing/{{user.UserId}}" target="FORM" style="margin-left:3px;"><span class="glyphicon glyphicon glyphicon-star-empty"></span>
+              {{UserNav.StopFollow}}{{user.name}} {{user.cognome}}.
+            </a>
+          {% else %}
+            <a onClick="location.reload();" href="/api/addFollowing/{{user.UserId}}" target="FORM" style="margin-left:3px;"><span class="glyphicon glyphicon-star"></span>
+              {{UserNav.Follow}}{{user.name}} {{user.cognome}}.
+            </a>
+        {% endif %}
+      {% endif %}
+
+      {% if getFollowN(user) == 0 %}
+        {% if user.UserId != login.UserId and follow == False%}
+          <li>{{user.name}} {{user.cognome}}{{UserNav.NoFollow}}</li>
+        {% else %}
+          <li>{{UserNav.YouNoFollow}}</li>
+        {% endif %}
+
+      {% else %}
+        <li><a href="/follow">{{UserNav.FollowingUsers}}<span class="badge">{{getFollowN(user)}}</span></a></li>
+        <div style="vertical-align:middle;">
+          {%for user in getFollowUsers(user)%}
+            <a href="/u/{{user.UserId}}">
+              <figure style="display:inline-block;max-height:70px;">
+                <img class="thumbnail" src="{{user.img}}" alt="{{user.UserId}}" style="height:70px;margin-bottom:5px;">
+                <figcaption>{{user.name}}<br>{{user.cognome}}</figcaption>
+              </figure>
+            </a>
+          {% endfor %}
+        </div>
+      {% endif %}
+    </ul><br>
+  </div>
+  <br>

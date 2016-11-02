@@ -1,0 +1,8 @@
+{
+  "name": "NapNap",
+  "description": "A Little Social Network in Python",
+  "image": "heroku/python",
+  "repository": "NapNap",
+  "keywords": ["python", "flask" ],
+  "addons": [ "heroku-postgresql" ]
+}

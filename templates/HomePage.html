@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <title>{{cfg.SocialName}}</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <style>
+    /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+    .row.content {height: 550px}
+
+    /* Set gray background color and 100% height */
+    .sidenav {
+      background-color: #f1f1f1;
+      height: 100%;
+    }
+
+    /* On small screens, set height to 'auto' for the grid */
+    @media screen and (max-width: 767px) {
+      .row.content {height: auto;}
+    }
+    div.sidenav{
+      border-top-right-radius: 3%;
+      border-bottom-right-radius: 3%;
+      word-break: break-all;
+    }
+    textarea.form-control{
+      border-top-left-radius: 0%;
+      border-top-right-radius: 0%;
+      border: 0px;
+    }
+    h4{
+      margin-bottom: 3px;
+    }
+    button{
+      margin-top: 5px;
+    }
+    span.glyphicon{
+      margin-left:-10px;
+      margin-right: 5px;
+    }
+    li > a{
+      padding-left: 5px !important;
+    }
+    ul{
+      margin-bottom: 5px;
+      margin-top: 5px;
+    }
+    ul > h2{
+      display:inline;
+    }
+    ul > a{
+      margin-left: 15px;
+    }
+
+    div#search > input{
+      vertical-align: middle !important;
+      width:350px;
+    }
+    div#search > *{
+      background-color: rgb(33, 33, 34) !important;
+      border: 1px rgb(38, 38, 38) solid !important;
+      color: white;
+    }
+    div#searchM > input{
+      vertical-align: middle !important;
+      width:100%;
+    }
+    div#searchM > *{
+      background-color: rgb(33, 33, 34) !important;
+      border: 1px rgb(38, 38, 38) solid !important;
+      color: white;
+    }
+
+    span.glyphicon{
+      padding-left:10px;
+    }
+    #EditProfilePhoto{
+      color:gray;
+      position:absolute;
+      top:15px;
+      right:15px;
+    }
+    #EditProfilePhoto:hover, #EditDesc:hover, .EditPost:hover{
+      color:black;
+    }
+    #EditDesc{
+      color: gray;
+    }
+    .well > h4 > *{
+      white-space: pre-wrap;
+    }
+    .well > h4 img{
+      max-width: 500px;
+      max-height: 500px;
+    }
+    .comment > h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      font-size: 175%;
+    }
+  </style>
+  <script>
+    $(function(){
+      $('#notification').popover(
+        {
+        trigger:"hover",
+        content:$("#notificheBox").html(),
+        title:"Notifiche Recenti",html:true,
+        container:"body"
+      });
+      //LOOP
+        setInterval(
+          function(){
+            $("#EditDescPanelTextArea").css("width", "100%");
+            $("#PostText").css("width", "100%");
+            $("#CommentText").css("width", "100%");
+          }
+        ,1000)
+      //END LOOP
+      $('#FileInputImage').on("change", function() {
+          if (window.File && window.FileReader && window.FileList && window.Blob){
+              var fsize = $('#FileInputImage')[0].files[0].size;
+
+              if(fsize>1024*1024*16){
+                  alert("This Image is too Big,max 16 MegaByte");
+                  $("#UploadForm").trigger("reset");
+              }
+          }else{
+              alert("{{lang.UploadMaxSizeError}}");
+          }
+        });
+    });
+    function reload(){
+      setTimeout(function(){
+        window.location.reload();
+      },1000);
+    }
+    function addCommentLocal(Id){
+      {% if login.is_anonymous == false %}
+        setTimeout(function(){
+        $("#"+Id+">form").html(`
+          <div class="panel panel-default">
+            <div class="panel-heading">{{getName(login.UserId)}} <small class="text-muted">@{{login.UserId}}</small></div>
+            <div class="panel-body">
+              <small class="text-muted">
+                {{lang.NewComment}}
+              </small><br>
+              <span class="comment">`+$("#3>form>div>textarea").val()+`</span>
+            </div>
+          </div>
+        `)},1000);
+      {% else %}
+        console.log("Not Logged");
+      {% endif %}
+    }
+  </script>
+</head>
+<body>
+	{% include "BodyExt.html" %}
+<iframe name="FORM" style="display:none">
+</iframe>
+
+<!-- Notifiche -->
+<div id="notificheBox" class="hide">
+  {%for noti in notification%}
+    <div>
+      <small style="display:block;">
+        {{ lang.NotificationText.format(date=noti.date.strftime("%c"), author=noti.author) }}
+      </small>
+      <span style="word-break:break-all;">{{noti.text|markdown}}</span>
+  	</div>
+    <hr>
+    {% endfor %}
+</div>
+<!-- Cambio Immagine-->
+<div class="modal fade" id="changeProfileImage" role="dialog">
+  <div class="modal-dialog">
+    <div class="panel panel-primary">
+      <div class="panel-heading">{{lang.ChangeProfileImage.text}}
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="panel-body">
+        <form action="/api/changeProfileImage" method="POST" target="FORM" enctype="multipart/form-data" class="text-center" id="UploadForm">
+          <label>{{lang.ChangeProfileImage.URL}}<input type="text" name="URL" class="form-control"></label>
+          <h4>{{lang.ChangeProfileImage.Upload}}</h4>
+          <label><input type="file" name="file" accept="image/*" class="form-control col-xs-3" id="FileInputImage"></label><br>
+          <label><input type="submit" value="Cambia Immagine" class="btn btn-primary form-control" onClick="reload();"></label>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% if login.is_anonymous == false %}
+  <!-- Cambio Descrizione-->
+  <div class="modal fade" id="editDesc" role="dialog">
+    <div class="modal-dialog">
+      <div class="panel panel-primary">
+        <div class="panel-heading">{{lang.ChangeDescription}}
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <form action="/api/editDesc" method="POST" target="FORM" class="text-center">
+          <textarea id="EditDescPanelTextArea" rows="5" class="form-control panel-body" name="text">{{user.desc}}</textarea>
+          <input type="submit" class="btn btn-primary" value="{{lang.ChangeDescription}}" onClick="reload();">
+        </form>
+      </div>
+    </div>
+  </div>
+{% endif %}
+  {% include "TopBar.html" %}
+  {% include "UserNav.html" %}
+        <div class="col-sm-9">
+          {% if user.UserId == login.UserId and follow == False%}
+            <form target="FORM" method="POST" action="/api/addPost" id="POST">
+              <div class="panel panel-default">
+                <div class="panel-heading panel-title">
+                  {{lang.AddPost}}
+                  <input type="submit" class="btn btn-primary pull-right" value="{{lang.Post}}" onClick="reload();">
+                  <!--<button type="button" class="btn btn-primary pull-right" type="submit" form="POST">Posta</button>-->
+                  <div class="clearfix"></div>
+                </div>
+                <textarea rows="5" class="form-control" name="text" id="PostText"></textarea>
+              </div>
+            </form>
+          {% endif %}
+          {% for post in posts %}
+            <!--POST-->
+            <article class="well">
+              <h4 style="word-wrap:break-word;position:relative;">
+                {{post.text|markdown}}
+              </h4>
+              <small class="text-muted">{{post.date.strftime("%c")}} @{{post.author}}</small><br>
+              <button data-toggle="collapse" data-target="#{{post.Id}}" class="btn btn-default">{{lang.CommentNamePlural}}</button>
+            </article>
+            <div class="panel-group collapse" id="{{post.Id}}">
+              {% if login.is_anonymous == false %}
+                <form target="FORM" method="POST" action="/api/addComment" style="margin-bottom:5px;">
+                  <input type="hidden" name="id" value="{{post.Id}}">
+                    <div class="panel panel-default">
+                      <div class="panel-heading panel-title">
+                        {{lang.AddComment}}
+                        <input type="submit" class="btn btn-primary pull-right" type="submit" value="{{lang.Comment}}" onClick="addCommentLocal({{post.Id}});">
+                        <div class="clearfix"></div>
+                      </div>
+                      <textarea rows="3" class="form-control" name="text" id="CommentText"></textarea>
+                    </div>
+                  </form>
+                {% endif %}
+              {%for comment in comments%}
+                {% if comment.post == post.Id%}
+                  <div class="panel panel-default">
+                    <div class="panel-heading">{{getName(comment.author)}} <small class="text-muted">@{{comment.author}}</small></div>
+                    <div class="panel-body">
+                      <small class="text-muted">
+                        {{comment.date.strftime("%x %X")}}
+                      </small><br>
+                      <span class="comment">{{comment.text|markdown}}</span>
+                    </div>
+                  </div>
+                {% endif %}
+              {% endfor %}
+            </div>
+            <!--END POST-->
+          {% endfor %}
+
+          {% set pageN=pageN or 0 %}
+          {% if posts|length == 0 and pageN > 0 %}
+            <script>
+              window.location.replace("{{URL}}{{pageN-1}}");
+            </script>
+          {% endif %}
+          <div style="margin-top:50px;margin-bottom:50px;">
+            {%if pageN > 0%}
+              <a href="{{URL}}{{pageN-1}}">
+                <button class="btn btn-default">
+                  {{lang.PreviousPage}}
+                </button>
+              </a>
+            {% endif %}
+            <button class="btn btn-success">
+              {{pageN}}
+            </button>
+            <a href="{{URL}}{{pageN+1}}">
+              <button class="btn btn-primary">
+                  {{lang.NextPage}}
+              </button>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% include "Footer.html" %}
+</body>
+</html>

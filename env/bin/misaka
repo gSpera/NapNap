@@ -1,0 +1,4 @@
+#!/home/NapNap/env/bin/python
+# EASY-INSTALL-SCRIPT: 'misaka==2.0.0','misaka'
+__requires__ = 'misaka==2.0.0'
+__import__('pkg_resources').run_script('misaka==2.0.0', 'misaka')

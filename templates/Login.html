@@ -1,0 +1,78 @@
+<html>
+  <head>
+    <title>{{cfg.SocialName}} Login</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+      *{
+        word-break: break-word;
+      }
+      form{
+        margin-top:5px;
+      }
+      Ainput{
+        margin:2px;
+      }
+      button.register{
+        margin-left: 35%;
+        margin-right: 35%;
+      }
+      input.center{
+        margin-left: 42%;
+        margin-right: 43%;
+      }
+      #Flash{
+        position: fixed;
+        bottom: 5%;
+        right: 5%;
+        max-width: 450px;
+        list-style-type: none;
+      }
+    </style>
+    <script>
+      function removeFlash(){
+        $("#Flash").fadeOut();
+      }
+      setTimeout(removeFlash,5000);
+    </script>
+  </head>
+  <body>
+	{% include "BodyExt.html" %}
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul id="Flash">
+          {% for message in messages %}
+            <li class="alert alert-danger">{{message}}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+    <div class="container">
+      <div class="jumbotron" style="text-align:center;">
+        <h1 style="display:inline;">{{cfg.SocialName}}</h1><h2 style="display:inline;"> Login</h2>
+        <form class="form-inline pagination-center" method="POST">
+            <div class="input-group">
+              <span class="input-group-addon" id="basic-addon3">@</span>
+              <input type="text" name="UserName" placeholder="Username" class="form-control">
+            </div><br>
+            <input type="password" name="Password" placeholder="Password" class="form-control" style="width:235px;margin-top:5px;"><br>
+            <input type="checkbox" name="remember" class="form-control" style="height:auto;"><label>Mantienimi Collegato</label><br>
+            <input type="submit" class="form-control visible-sm visible-md visible-lg btn btn-primary center" value="Login" style="width:15%;"><br>
+            <input type="submit" class="form-control btn btn-primary visible-xs" value="Login"><br>
+        </form>
+        <br>
+      </div>
+        <div class="jumbotron" style="text-align:center;padding-bottom:50px;">
+          <h2>{{lang.RegistrationMessage}}</h2>
+          <a href="/register" class="pagination-center">
+            <button class="form-control col-xs-4 register visible-md visible-lg" style="width:30%;"><big>Registrati</big></button>
+            <button class="form-control col-xs-3 visible-xs visible-sm">Registrati</button>
+          </a>
+        </div>
+      </div>
+      {% include "Footer.html" %}
+  </body>
+</html>
