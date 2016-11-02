@@ -136,7 +136,8 @@ def getPosts(username, offset):
 @app.route("/api/Telegram"+cfg["TelegramBotToken"], methods=["POST"])
 def telegramApi():
     def sendMsg(chat_id, msg):
-        print chat_id
+        if cfg["TelegramBotToken"] == "":
+            return "Telegram Bot Disabled", 400
         requests.get("https://api.telegram.org/bot{bot_id}/sendMessage?chat_id={chat_id}&text={msg}&parse_mode=Markdown".format(
                 bot_id=cfg["TelegramBotToken"],
                 chat_id=chat_id,
@@ -154,42 +155,42 @@ def telegramApi():
         param = text.split(" ")
         if len(param) != 3:
             sendMsg(chat_id, "Utilizzo: `/connect @UserId Password`")
-            return "Connect Command Usage"
+            return "Connect Command Usage", 400
         if param[1].startswith("@"):
             param[1] = param[1][1:]
         user = User.query.filter_by(UserId=param[1]).first()
         if user is None:
             sendMsg(chat_id, "Questo utente non esiste")
-            return "Not Exist user"
+            return "Not Exist user", 404
         salt = user.Salt
         Hash = user.Hash
         if bcrypt.hashpw(str(param[2]), "$2a$12$"+salt) == Hash:
             user.TelegramChat = chat_id
             db.session.commit()
             sendMsg(chat_id, "Connesso")
-            return "Connected"
+            return "Connected", 200
         else:
             sendMsg(chat_id, "Password Errata")
-            return "Password Errata"
+            return "Password Errata", 403
     if text.startswith("/remove"):
         param = text.split(" ")
         if len(param) != 2:
             sendMsg(chat_id, "Utilizzo: `/remove @UserId`")
-            return "Remove Command Usage"
+            return "Remove Command Usage", 400
         if param[1].startswith("@"):
             param[1] = param[1][1:]
         user = User.query.filter_by(UserId=param[1]).first()
         if user is None:
             sendMsg(chat_id, "Utente non collegato.")
-            return "Not Connected user"
+            return "Not Connected user", 404
         if user.TelegramChat == chat_id:
             user.TelegramChat = 0
             db.session.commit()
             sendMsg(chat_id, "Utente Scolleggato")
-            return "Disconnected"
+            return "Disconnected", 200
         else:
             sendMsg(chat_id, "Utente non collegato.")
-            return "Not Connected user"
+            return "Not Connected user", 400
     if user == []:
         sendMsg(chat_id, "Non sei collegato con nessun account:%0AScrivi `/connect @UserName Password` per connetterti")
         return "Not Connected"

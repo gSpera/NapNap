@@ -1,0 +1,14 @@
+{
+	"SocialName":"NapNap",
+	"Lang":"it",
+	"SiteUrl":"https://dev.napnap.ml",
+	"Host":"0.0.0.0",
+	"Port":80,
+	"Desc":"Un Semplice Social-Network",
+	"DB_URL":"DB_URL",
+	"UploadMaxSize":16777216,
+	"SECRET_KEY":"Keep It Secret",
+	"TelegramBotToken":"BotToken",
+	"PostLimit":15,
+	"Debug":true
+}
